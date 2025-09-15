@@ -287,9 +287,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-red-100 p-4 md:p-8">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-        <div className="p-5 bg-indigo-600 text-white flex justify-between items-center">
+        <div className="p-5 bg-red-600 text-white flex justify-between items-center">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold">
               Volleyball Player Statistics
@@ -298,7 +298,7 @@ export default function Home() {
           </div>
           <button
             onClick={downloadPDF}
-            className="px-4 py-2 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 flex items-center"
+            className="px-4 py-2 bg-white text-black rounded-lg font-semibold hover:bg-indigo-50 flex items-center"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -482,7 +482,7 @@ export default function Home() {
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                         <button
                           onClick={() => handleEdit(player)}
-                          className="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+                          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                           Edit
                         </button>
@@ -502,7 +502,7 @@ export default function Home() {
             </p>
             <div className="flex space-x-2">
               <button
-                className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={() => {
                   const sorted = [...players].sort((a, b) =>
                     a.name.localeCompare(b.name)
@@ -513,7 +513,7 @@ export default function Home() {
                 Sort by Name
               </button>
               <button
-                className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={() => {
                   const sorted = [...players].sort(
                     (a, b) =>
