@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-// Define the PlayerStats type
 interface PlayerStats {
   id: number;
   name: string;
@@ -13,7 +12,6 @@ interface PlayerStats {
   receptions: string;
 }
 
-// Sample data (in a real app, this would come from an API or database)
 const data = {
   players: [
     {
@@ -153,58 +151,61 @@ export default function Home() {
   const [players, setPlayers] = useState<PlayerStats[]>([]);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editForm, setEditForm] = useState<PlayerStats | null>(null);
-  const [sortConfig, setSortConfig] = useState<{ key: string; direction: string } | null>(null);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: string;
+  } | null>(null);
   const tableRef = useRef<HTMLTableElement>(null);
 
-  // Initialize players data
   useEffect(() => {
     setPlayers(data.players);
   }, []);
 
-  // Handle editing a player's stats
   const handleEdit = (player: PlayerStats) => {
     setEditingId(player.id);
     setEditForm({ ...player });
   };
 
-  // Handle saving edited stats
   const handleSave = () => {
     if (editForm) {
-      setPlayers(players.map(player => 
-        player.id === editForm.id ? editForm : player
-      ));
+      setPlayers(
+        players.map((player) => (player.id === editForm.id ? editForm : player))
+      );
       setEditingId(null);
       setEditForm(null);
     }
   };
 
-  // Handle canceling edit
   const handleCancel = () => {
     setEditingId(null);
     setEditForm(null);
   };
 
-  // Handle input changes in edit form
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof PlayerStats) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof PlayerStats
+  ) => {
     if (editForm) {
       setEditForm({ ...editForm, [field]: e.target.value });
     }
   };
 
-  // Handle sorting
   const handleSort = (key: string) => {
-    let direction = 'ascending';
-    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+    let direction = "ascending";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
     }
     setSortConfig({ key, direction });
 
     const sortedPlayers = [...players].sort((a, b) => {
-      // Convert to numbers for proper numeric sorting
       const aValue = a[key as keyof PlayerStats] || "0";
       const bValue = b[key as keyof PlayerStats] || "0";
-      
-      if (direction === 'ascending') {
+
+      if (direction === "ascending") {
         return Number(aValue) - Number(bValue);
       } else {
         return Number(bValue) - Number(aValue);
@@ -249,7 +250,9 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            ${players.map(player => `
+            ${players
+              .map(
+                (player) => `
               <tr>
                 <td>${player.name}</td>
                 <td>${player.kills}</td>
@@ -259,7 +262,9 @@ export default function Home() {
                 <td>${player.aces}</td>
                 <td>${player.receptions}</td>
               </tr>
-            `).join('')}
+            `
+              )
+              .join("")}
           </tbody>
         </table>
         <div class="footer">
@@ -268,18 +273,15 @@ export default function Home() {
       </body>
       </html>
     `;
-    
-    // Open print dialog
-    const printWindow = window.open('', '_blank');
+
+    const printWindow = window.open("", "_blank");
     if (printWindow) {
       printWindow.document.write(printContent);
       printWindow.document.close();
-      
-      // Wait for content to load before printing
-      printWindow.onload = function() {
+
+      printWindow.onload = function () {
         printWindow.focus();
         printWindow.print();
-        // printWindow.close(); // Uncomment if you want to close after printing
       };
     }
   };
@@ -289,65 +291,92 @@ export default function Home() {
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div className="p-5 bg-indigo-600 text-white flex justify-between items-center">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold">Volleyball Player Statistics</h1>
+            <h1 className="text-2xl md:text-3xl font-bold">
+              Volleyball Player Statistics
+            </h1>
             <p className="mt-2">Track and manage player performance metrics</p>
           </div>
           <button
             onClick={downloadPDF}
             className="px-4 py-2 bg-white text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 flex items-center"
           >
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
             </svg>
             Download PDF
           </button>
         </div>
-        
+
         <div className="overflow-x-auto p-4">
           <table className="min-w-full divide-y divide-gray-200" ref={tableRef}>
             <thead className="bg-gray-50">
               <tr>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('name')}
+                  onClick={() => handleSort("name")}
                 >
-                  Name {sortConfig?.key === 'name' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Name{" "}
+                  {sortConfig?.key === "name" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('kills')}
+                  onClick={() => handleSort("kills")}
                 >
-                  Kills {sortConfig?.key === 'kills' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Kills{" "}
+                  {sortConfig?.key === "kills" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('blocks')}
+                  onClick={() => handleSort("blocks")}
                 >
-                  Blocks {sortConfig?.key === 'blocks' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Blocks{" "}
+                  {sortConfig?.key === "blocks" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('digs')}
+                  onClick={() => handleSort("digs")}
                 >
-                  Digs {sortConfig?.key === 'digs' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Digs{" "}
+                  {sortConfig?.key === "digs" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('assists')}
+                  onClick={() => handleSort("assists")}
                 >
-                  Assists {sortConfig?.key === 'assists' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Assists{" "}
+                  {sortConfig?.key === "assists" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('aces')}
+                  onClick={() => handleSort("aces")}
                 >
-                  Aces {sortConfig?.key === 'aces' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Aces{" "}
+                  {sortConfig?.key === "aces" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
-                <th 
+                <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSort('receptions')}
+                  onClick={() => handleSort("receptions")}
                 >
-                  Receptions {sortConfig?.key === 'receptions' && (sortConfig.direction === 'ascending' ? '↑' : '↓')}
+                  Receptions{" "}
+                  {sortConfig?.key === "receptions" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -358,7 +387,7 @@ export default function Home() {
               {players.map((player) => (
                 <tr key={player.id} className="hover:bg-gray-50">
                   {editingId === player.id ? (
-                    // Edit mode
+
                     <>
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                         {player.name}
@@ -368,7 +397,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.kills || ""}
-                          onChange={(e) => handleChange(e, 'kills')}
+                          onChange={(e) => handleChange(e, "kills")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -376,7 +405,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.blocks || ""}
-                          onChange={(e) => handleChange(e, 'blocks')}
+                          onChange={(e) => handleChange(e, "blocks")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -384,7 +413,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.digs || ""}
-                          onChange={(e) => handleChange(e, 'digs')}
+                          onChange={(e) => handleChange(e, "digs")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -392,7 +421,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.assists || ""}
-                          onChange={(e) => handleChange(e, 'assists')}
+                          onChange={(e) => handleChange(e, "assists")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -400,7 +429,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.aces || ""}
-                          onChange={(e) => handleChange(e, 'aces')}
+                          onChange={(e) => handleChange(e, "aces")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -408,7 +437,7 @@ export default function Home() {
                           type="number"
                           className="w-16 p-1 border rounded"
                           value={editForm?.receptions || ""}
-                          onChange={(e) => handleChange(e, 'receptions')}
+                          onChange={(e) => handleChange(e, "receptions")}
                         />
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -465,28 +494,33 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        
+
         <div className="p-4 bg-gray-50 border-t border-gray-200">
           <div className="flex justify-between items-center">
             <p className="text-sm text-gray-600">
               Showing {players.length} players
             </p>
             <div className="flex space-x-2">
-              <button 
+              <button
                 className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
                 onClick={() => {
-                  const sorted = [...players].sort((a, b) => a.name.localeCompare(b.name));
+                  const sorted = [...players].sort((a, b) =>
+                    a.name.localeCompare(b.name)
+                  );
                   setPlayers(sorted);
                 }}
               >
                 Sort by Name
               </button>
-              <button 
+              <button
                 className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600"
                 onClick={() => {
-                  const sorted = [...players].sort((a, b) => 
-                    (Number(b.kills) + Number(b.blocks) + Number(b.aces)) - 
-                    (Number(a.kills) + Number(a.blocks) + Number(a.aces))
+                  const sorted = [...players].sort(
+                    (a, b) =>
+                      Number(b.kills) +
+                      Number(b.blocks) +
+                      Number(b.aces) -
+                      (Number(a.kills) + Number(a.blocks) + Number(a.aces))
                   );
                   setPlayers(sorted);
                 }}
