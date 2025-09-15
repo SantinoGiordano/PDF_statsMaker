@@ -1,9 +1,9 @@
-const data = {
+export const data = {
   players: [
     {
       id: 1,
       name: "Fatima Bryan",
-      
+
       kills: "",
       digs: "",
       blocks: "",
@@ -12,7 +12,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 2,
       name: "Colleen Clark ",
       kills: "",
       digs: "",
@@ -22,7 +22,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 3,
       name: "Merin Czerwiec",
       kills: "",
       digs: "",
@@ -32,7 +32,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 4,
       name: "kathrine DeCaro",
       kills: "",
       digs: "",
@@ -42,7 +42,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 5,
       name: "Eija Hatcher",
       kills: "",
       digs: "",
@@ -52,7 +52,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 6,
       name: "Samantha Hess",
       kills: "",
       digs: "",
@@ -62,7 +62,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 7,
       name: "Mckayala Nergrown-Mautro",
       kills: "",
       digs: "",
@@ -72,7 +72,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 8,
       name: "Kayla Pecoy",
       kills: "",
       digs: "",
@@ -82,7 +82,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 9,
       name: "Caroline Tabb",
       kills: "",
       digs: "",
@@ -92,7 +92,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 10,
       name: "Paiyton Trombly",
       kills: "",
       digs: "",
@@ -102,7 +102,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 11,
       name: "Payton Verterame",
       kills: "",
       digs: "",
@@ -112,7 +112,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 12,
       name: "Lindsey Wiatrowski",
       kills: "",
       digs: "",
@@ -122,7 +122,7 @@ const data = {
       receptions: "",
     },
     {
-      id: 1,
+      id: 13,
       name: "Mary Bajakian",
       kills: "",
       digs: "",
