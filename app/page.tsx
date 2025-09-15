@@ -236,7 +236,6 @@ export default function Home() {
               <th>Digs</th>
               <th>Assists</th>
               <th>Aces</th>
-              <th>Receptions</th>
             </tr>
           </thead>
           <tbody>
@@ -250,7 +249,6 @@ export default function Home() {
                 <td>${player.digs}</td>
                 <td>${player.assists}</td>
                 <td>${player.aces}</td>
-                <td>${player.receptions}</td>
               </tr>
             `
               )
@@ -453,9 +451,6 @@ export default function Home() {
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                         {player.aces}
-                      </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
-                        {player.receptions}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                         <button
