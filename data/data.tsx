@@ -92,16 +92,6 @@ export const data = {
       receptions: "",
     },
     {
-      id: 10,
-      name: "Paiyton Trombly",
-      kills: "",
-      digs: "",
-      blocks: "",
-      aces: "",
-
-      receptions: "",
-    },
-    {
       id: 11,
       name: "Payton Verterame",
       kills: "",
