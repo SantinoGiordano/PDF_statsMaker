@@ -10,7 +10,6 @@ interface PlayerStats {
   digs: string;
   assists: string;
   aces: string;
-
 }
 
 const data = {
@@ -18,16 +17,22 @@ const data = {
     {
       id: 1,
       name: "Fatima Bryan",
+      class: "Senoir",
+      pos: "DS",
+      number: "7",
       kills: "0",
       digs: "0",
       blocks: "0",
       aces: "0",
       assists: "0",
-
     },
     {
       id: 2,
       name: "Colleen Clark",
+      pos: "OH",
+      class: "Senior",
+
+      number: "8",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -37,6 +42,10 @@ const data = {
     {
       id: 3,
       name: "Merin Czerwiec",
+      pos: "MB",
+      class: "Freshman",
+
+      number: "14",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -46,6 +55,10 @@ const data = {
     {
       id: 4,
       name: "Kathrine DeCaro",
+      pos: "OH",
+      class: "Senior",
+
+      number: "11",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -55,6 +68,10 @@ const data = {
     {
       id: 5,
       name: "Eija Hatcher",
+      pos: "MB",
+      class: "Freshman",
+
+      number: "19",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -64,6 +81,10 @@ const data = {
     {
       id: 6,
       name: "Samantha Hess",
+      number: "5",
+      class: "Senior",
+
+      pos: "OH",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -73,6 +94,10 @@ const data = {
     {
       id: 7,
       name: "Mckayala Nergrown-Mautro",
+      number: "22",
+      class: "Senior",
+
+      pos: "L",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -82,6 +107,10 @@ const data = {
     {
       id: 8,
       name: "Kayla Pecoy",
+      number: "20",
+      class: "Junior",
+
+      pos: "S",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -91,15 +120,10 @@ const data = {
     {
       id: 9,
       name: "Caroline Tabb",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 10,
-      name: "Paiyton Trombly",
+      number: "16",
+      class: "Sophomore",
+
+      pos: "OH",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -109,6 +133,10 @@ const data = {
     {
       id: 11,
       name: "Payton Verterame",
+      number: "12",
+      class: "Sophomore",
+
+      pos: "DS",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -118,6 +146,10 @@ const data = {
     {
       id: 12,
       name: "Lindsey Wiatrowski",
+      number: "13",
+      class: "Junior",
+
+      pos: "MB",
       kills: "0",
       digs: "0",
       blocks: "0",
@@ -127,6 +159,9 @@ const data = {
     {
       id: 13,
       name: "Mary Bajakian",
+      number: "15",
+      class: "Freshman",
+      pos: "OH",
       kills: "0",
       digs: "0",
       blocks: "0",
