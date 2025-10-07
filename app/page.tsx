@@ -5,6 +5,9 @@ import { useState, useEffect, useRef } from "react";
 interface PlayerStats {
   id: number;
   name: string;
+  class?: string;
+  pos?: string;
+  number?: string;
   kills: string;
   blocks: string;
   digs: string;
@@ -265,6 +268,7 @@ export default function Home() {
         <table>
           <thead>
             <tr>
+              <th>Number</th>
               <th>Name</th>
               <th>Kills</th>
               <th>Blocks</th>
@@ -278,7 +282,11 @@ export default function Home() {
               .map(
                 (player) => `
               <tr>
-                <td>${player.name}</td>
+                <td>${player.number ? player.number : ''}</td>
+                <td>
+                  ${player.name}
+                  <div style="font-size:0.85em;color:#6b7280;margin-top:2px;">${player.class ? player.class : ''}${player.pos ? ' • ' + player.pos : ''}</div>
+                </td>
                 <td>${player.kills}</td>
                 <td>${player.blocks}</td>
                 <td>${player.digs}</td>
@@ -353,6 +361,7 @@ export default function Home() {
           <table className="min-w-full divide-y divide-gray-200" ref={tableRef}>
             <thead className="bg-gray-50">
               <tr>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number</th>
                 <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSort("name")}
@@ -408,8 +417,19 @@ export default function Home() {
                 <tr key={player.id} className="hover:bg-gray-50">
                   {editingId === player.id ? (
                     <>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <input
+                          type="text"
+                          className="w-12 p-1 border rounded"
+                          value={editForm?.number || ""}
+                          onChange={(e) => handleChange(e, "number")}
+                        />
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {player.name}
+                        <div className="flex flex-col">
+                          <span>{player.name}</span>
+                          <span className="text-xs text-gray-400 mt-0.5">{(player.class ? player.class : "")}{player.pos ? ` • ${player.pos}` : ""}</span>
+                        </div>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                         <input
@@ -469,8 +489,12 @@ export default function Home() {
                   ) : (
                     // View mode
                     <>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{player.number}</td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {player.name}
+                        <div className="flex flex-col">
+                          <span>{player.name}</span>
+                          <span className="text-xs text-gray-400 mt-0.5">{(player.class ? player.class : "")}{player.pos ? ` • ${player.pos}` : ""}</span>
+                        </div>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
                         {player.kills}
