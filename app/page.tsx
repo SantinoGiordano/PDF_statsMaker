@@ -17,6 +17,18 @@ interface PlayerStats {
 
 const data = {
   players: [
+        {
+      id: 13,
+      name: "Mary Bajakian",
+      number: "15",
+      class: "Freshman",
+      pos: "OH",
+      kills: "0",
+      digs: "0",
+      blocks: "0",
+      aces: "0",
+      assists: "0",
+    },
     {
       id: 1,
       name: "Fatima Bryan",
@@ -158,19 +170,7 @@ const data = {
       blocks: "0",
       aces: "0",
       assists: "0",
-    },
-    {
-      id: 13,
-      name: "Mary Bajakian",
-      number: "15",
-      class: "Freshman",
-      pos: "OH",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
+    }
   ],
 };
 
@@ -183,6 +183,7 @@ export default function Home() {
     direction: string;
   } | null>(null);
   const tableRef = useRef<HTMLTableElement>(null);
+  const [sheetNote, setSheetNote] = useState<string>("");
 
   useEffect(() => {
     setPlayers(data.players);
@@ -228,15 +229,35 @@ export default function Home() {
     }
     setSortConfig({ key, direction });
 
-    const sortedPlayers = [...players].sort((a, b) => {
-      const aValue = a[key as keyof PlayerStats] || "0";
-      const bValue = b[key as keyof PlayerStats] || "0";
+    const getLastName = (fullName: string | undefined) => {
+      if (!fullName) return "";
+      const parts = fullName.trim().split(/\s+/);
+      return parts.length ? parts[parts.length - 1].toLowerCase() : fullName.toLowerCase();
+    };
 
-      if (direction === "ascending") {
-        return Number(aValue) - Number(bValue);
-      } else {
-        return Number(bValue) - Number(aValue);
+    const sortedPlayers = [...players].sort((a, b) => {
+      if (key === "name") {
+        const aLast = getLastName(a.name as string);
+        const bLast = getLastName(b.name as string);
+        return direction === "ascending"
+          ? aLast.localeCompare(bLast)
+          : bLast.localeCompare(aLast);
       }
+
+      // for numeric-like fields, compare as numbers; otherwise fallback to string compare
+      const aValue = a[key as keyof PlayerStats] ?? "";
+      const bValue = b[key as keyof PlayerStats] ?? "";
+
+  const aNum = Number(String(aValue));
+  const bNum = Number(String(bValue));
+
+      if (!isNaN(aNum) && !isNaN(bNum)) {
+        return direction === "ascending" ? aNum - bNum : bNum - aNum;
+      }
+
+      const aStr = String(aValue).toLowerCase();
+      const bStr = String(bValue).toLowerCase();
+      return direction === "ascending" ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
     });
 
     setPlayers(sortedPlayers);
@@ -264,7 +285,7 @@ export default function Home() {
       </head>
       <body>
         <h1>Pope Volleyball Statsheet</h1>
-        <div class="subtitle">Generated on ${new Date().toLocaleDateString()}</div>
+  <div class="subtitle">${sheetNote ? sheetNote : ""}</div>
         <table>
           <thead>
             <tr>
@@ -334,6 +355,15 @@ export default function Home() {
               Pope Volleyball Statsheet
             </h1>
             <p className="mt-2">Track and manage player performance metrics</p>
+            <div className="mt-3">
+              <input
+                aria-label="Sheet custom info"
+                placeholder="Enter custom header text (e.g. Match, Opponent, Location)"
+                value={sheetNote}
+                onChange={(e) => setSheetNote(e.target.value)}
+                className="w-full md:w-80 p-2 rounded text-black"
+              />
+            </div>
           </div>
           <button
             onClick={downloadPDF}
