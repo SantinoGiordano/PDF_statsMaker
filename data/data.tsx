@@ -2,7 +2,7 @@ export const data = {
   players: [
     {
       id: 1,
-      name: "Fatima Bryan",
+      name: "Makenna Mezzetti",
 
       kills: "",
       digs: "",
@@ -13,7 +13,7 @@ export const data = {
     },
     {
       id: 2,
-      name: "Colleen Clark ",
+      name: "Fiona Padykula",
       kills: "",
       digs: "",
       blocks: "",
@@ -33,7 +33,7 @@ export const data = {
     },
     {
       id: 4,
-      name: "kathrine DeCaro",
+      name: "Leah Caswell",
       kills: "",
       digs: "",
       blocks: "",
@@ -53,26 +53,6 @@ export const data = {
     },
     {
       id: 6,
-      name: "Samantha Hess",
-      kills: "",
-      digs: "",
-      blocks: "",
-      aces: "",
-
-      receptions: "",
-    },
-    {
-      id: 7,
-      name: "Mckayala Nergrown-Mautro",
-      kills: "",
-      digs: "",
-      blocks: "",
-      aces: "",
-
-      receptions: "",
-    },
-    {
-      id: 8,
       name: "Kayla Pecoy",
       kills: "",
       digs: "",
@@ -82,7 +62,7 @@ export const data = {
       receptions: "",
     },
     {
-      id: 9,
+      id: 7,
       name: "Caroline Tabb",
       kills: "",
       digs: "",
@@ -92,7 +72,7 @@ export const data = {
       receptions: "",
     },
     {
-      id: 11,
+      id: 8,
       name: "Payton Verterame",
       kills: "",
       digs: "",
@@ -102,8 +82,8 @@ export const data = {
       receptions: "",
     },
     {
-      id: 12,
-      name: "Lindsey Wiatrowski",
+      id: 9,
+      name: "Kyra Daniels",
       kills: "",
       digs: "",
       blocks: "",
@@ -112,8 +92,18 @@ export const data = {
       receptions: "",
     },
     {
-      id: 13,
-      name: "Mary Bajakian",
+      id: 10,
+      name: "Alia Rosenblum",
+      kills: "",
+      digs: "",
+      blocks: "",
+      aces: "",
+
+      receptions: "",
+    },
+    {
+      id: 11,
+      name: "Shaneil Snape",
       kills: "",
       digs: "",
       blocks: "",
