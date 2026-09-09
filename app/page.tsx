@@ -289,7 +289,8 @@ export default function Home() {
                         <input
                           type="text"
                           className="w-12 p-1 border rounded"
-                          value={editForm?.number || ""}
+                          value={editForm?.number ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "number")}
                         />
                       </td>
@@ -306,7 +307,8 @@ export default function Home() {
                         <input
                           type="number"
                           className="w-16 p-1 border rounded"
-                          value={editForm?.kills || ""}
+                          value={editForm?.kills ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "kills")}
                         />
                       </td>
@@ -314,7 +316,8 @@ export default function Home() {
                         <input
                           type="number"
                           className="w-16 p-1 border rounded"
-                          value={editForm?.blocks || ""}
+                          value={editForm?.blocks ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "blocks")}
                         />
                       </td>
@@ -322,7 +325,8 @@ export default function Home() {
                         <input
                           type="number"
                           className="w-16 p-1 border rounded"
-                          value={editForm?.digs || ""}
+                          value={editForm?.digs ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "digs")}
                         />
                       </td>
@@ -330,7 +334,8 @@ export default function Home() {
                         <input
                           type="number"
                           className="w-16 p-1 border rounded"
-                          value={editForm?.assists || ""}
+                          value={editForm?.assists ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "assists")}
                         />
                       </td>
@@ -338,7 +343,8 @@ export default function Home() {
                         <input
                           type="number"
                           className="w-16 p-1 border rounded"
-                          value={editForm?.aces || ""}
+                          value={editForm?.aces ?? ""}
+                          onFocus={(e) => e.currentTarget.select()}
                           onChange={(e) => handleChange(e, "aces")}
                         />
                       </td>
