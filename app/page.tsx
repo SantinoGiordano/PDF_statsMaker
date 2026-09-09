@@ -1,178 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-
-interface PlayerStats {
-  id: number;
-  name: string;
-  class?: string;
-  pos?: string;
-  number?: string;
-  kills: string;
-  blocks: string;
-  digs: string;
-  assists: string;
-  aces: string;
-}
-
-const data = {
-  players: [
-        {
-      id: 13,
-      name: "Mary Bajakian",
-      number: "15",
-      class: "Freshman",
-      pos: "OH",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 1,
-      name: "Fatima Bryan",
-      class: "Senoir",
-      pos: "DS",
-      number: "7",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 2,
-      name: "Colleen Clark",
-      pos: "OH",
-      class: "Senior",
-
-      number: "8",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 3,
-      name: "Merin Czerwiec",
-      pos: "MB",
-      class: "Freshman",
-
-      number: "14",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 4,
-      name: "Kathrine DeCaro",
-      pos: "OH",
-      class: "Senior",
-
-      number: "11",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 5,
-      name: "Eija Hatcher",
-      pos: "MB",
-      class: "Freshman",
-
-      number: "19",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 6,
-      name: "Samantha Hess",
-      number: "5",
-      class: "Senior",
-
-      pos: "OH",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 7,
-      name: "Mckayala Nergrown-Mautro",
-      number: "22",
-      class: "Senior",
-
-      pos: "L",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 8,
-      name: "Kayla Pecoy",
-      number: "20",
-      class: "Junior",
-
-      pos: "S",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 9,
-      name: "Caroline Tabb",
-      number: "16",
-      class: "Sophomore",
-
-      pos: "OH",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 11,
-      name: "Payton Verterame",
-      number: "12",
-      class: "Sophomore",
-
-      pos: "DS",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    },
-    {
-      id: 12,
-      name: "Lindsey Wiatrowski",
-      number: "13",
-      class: "Junior",
-
-      pos: "MB",
-      kills: "0",
-      digs: "0",
-      blocks: "0",
-      aces: "0",
-      assists: "0",
-    }
-  ],
-};
+import { data } from "../data/data";
+import type { PlayerStats } from "../utils/types";
 
 export default function Home() {
   const [players, setPlayers] = useState<PlayerStats[]>([]);
@@ -197,7 +27,9 @@ export default function Home() {
   const handleSave = () => {
     if (editForm) {
       setPlayers(
-        players.map((player) => (player.id === editForm.id ? editForm : player))
+        players.map((player) =>
+          player.id === editForm.id ? editForm : player,
+        ),
       );
       setEditingId(null);
       setEditForm(null);
@@ -211,7 +43,7 @@ export default function Home() {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: keyof PlayerStats
+    field: keyof PlayerStats,
   ) => {
     if (editForm) {
       setEditForm({ ...editForm, [field]: e.target.value });
@@ -232,7 +64,9 @@ export default function Home() {
     const getLastName = (fullName: string | undefined) => {
       if (!fullName) return "";
       const parts = fullName.trim().split(/\s+/);
-      return parts.length ? parts[parts.length - 1].toLowerCase() : fullName.toLowerCase();
+      return parts.length
+        ? parts[parts.length - 1].toLowerCase()
+        : fullName.toLowerCase();
     };
 
     const sortedPlayers = [...players].sort((a, b) => {
@@ -248,8 +82,8 @@ export default function Home() {
       const aValue = a[key as keyof PlayerStats] ?? "";
       const bValue = b[key as keyof PlayerStats] ?? "";
 
-  const aNum = Number(String(aValue));
-  const bNum = Number(String(bValue));
+      const aNum = Number(String(aValue));
+      const bNum = Number(String(bValue));
 
       if (!isNaN(aNum) && !isNaN(bNum)) {
         return direction === "ascending" ? aNum - bNum : bNum - aNum;
@@ -257,7 +91,9 @@ export default function Home() {
 
       const aStr = String(aValue).toLowerCase();
       const bStr = String(bValue).toLowerCase();
-      return direction === "ascending" ? aStr.localeCompare(bStr) : bStr.localeCompare(aStr);
+      return direction === "ascending"
+        ? aStr.localeCompare(bStr)
+        : bStr.localeCompare(aStr);
     });
 
     setPlayers(sortedPlayers);
@@ -303,10 +139,10 @@ export default function Home() {
               .map(
                 (player) => `
               <tr>
-                <td>${player.number ? player.number : ''}</td>
+                <td>${player.number ? player.number : ""}</td>
                 <td>
                   ${player.name}
-                  <div style="font-size:0.85em;color:#6b7280;margin-top:2px;">${player.class ? player.class : ''}${player.pos ? ' • ' + player.pos : ''}</div>
+                  <div style="font-size:0.85em;color:#6b7280;margin-top:2px;">${player.class ? player.class : ""}${player.pos ? " • " + player.pos : ""}</div>
                 </td>
                 <td>${player.kills}</td>
                 <td>${player.blocks}</td>
@@ -314,7 +150,7 @@ export default function Home() {
                 <td>${player.assists}</td>
                 <td>${player.aces}</td>
               </tr>
-            `
+            `,
               )
               .join("")}
           </tbody>
@@ -391,7 +227,9 @@ export default function Home() {
           <table className="min-w-full divide-y divide-gray-200" ref={tableRef}>
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number</th>
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Number
+                </th>
                 <th
                   className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSort("name")}
@@ -458,7 +296,10 @@ export default function Home() {
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div className="flex flex-col">
                           <span>{player.name}</span>
-                          <span className="text-xs text-gray-400 mt-0.5">{(player.class ? player.class : "")}{player.pos ? ` • ${player.pos}` : ""}</span>
+                          <span className="text-xs text-gray-400 mt-0.5">
+                            {player.class ? player.class : ""}
+                            {player.pos ? ` • ${player.pos}` : ""}
+                          </span>
                         </div>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -519,11 +360,16 @@ export default function Home() {
                   ) : (
                     // View mode
                     <>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{player.number}</td>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        {player.number}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div className="flex flex-col">
                           <span>{player.name}</span>
-                          <span className="text-xs text-gray-400 mt-0.5">{(player.class ? player.class : "")}{player.pos ? ` • ${player.pos}` : ""}</span>
+                          <span className="text-xs text-gray-400 mt-0.5">
+                            {player.class ? player.class : ""}
+                            {player.pos ? ` • ${player.pos}` : ""}
+                          </span>
                         </div>
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
@@ -567,7 +413,7 @@ export default function Home() {
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={() => {
                   const sorted = [...players].sort((a, b) =>
-                    a.name.localeCompare(b.name)
+                    a.name.localeCompare(b.name),
                   );
                   setPlayers(sorted);
                 }}
@@ -582,7 +428,7 @@ export default function Home() {
                       Number(b.kills) +
                       Number(b.blocks) +
                       Number(b.aces) -
-                      (Number(a.kills) + Number(a.blocks) + Number(a.aces))
+                      (Number(a.kills) + Number(a.blocks) + Number(a.aces)),
                   );
                   setPlayers(sorted);
                 }}
